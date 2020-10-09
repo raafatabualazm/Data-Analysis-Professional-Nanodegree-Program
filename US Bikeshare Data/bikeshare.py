@@ -141,10 +141,15 @@ def user_stats(df):
     print('-'*40)
 
 def display_raw_data(df):
-    data = dict(df.head())
-    for k in list(data.keys())[:]:
-        print(data[k])
-        print('\n')
+    i = 0
+    chk = input('\nWould you like to display 5 elements of the raw data? Enter yes or no\n').lower()
+    while chk == 'yes':
+        data = dict(df.iloc[i: i + 5])
+        for k in list(data.keys()):
+            print(data[k])
+            print('\n')
+        chk = input('\nWould you like to display 5 elements of the raw data? Enter yes or no\n').lower()
+        i+= 5
 
 def main():
     while True:
@@ -155,9 +160,7 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
-        chk = input('\nWould you like to display 5 elements of the raw data? Enter yes or no\n').lower()
-        if chk == 'yes':
-            display_raw_data(df)
+        display_raw_data(df)
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
